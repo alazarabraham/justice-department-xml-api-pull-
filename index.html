@@ -1,0 +1,50 @@
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script> -->
+</head>
+
+<body>
+    <button id="fetchbutton">Cado</button>
+    <div id="output"></div>
+    <form>
+        Enter Search:<br>
+        <input type="text" name="firstname"><br>
+      </form>
+
+    <script type="text/javascript">
+        document.getElementById("fetchbutton").addEventListener("click", getData);
+        const output = document.getElementById("output");
+        // document.getElementById("submit").addEventListener("submit", submitData)
+        
+        function getData(){
+        
+            fetch(`https://cors-anywhere.herokuapp.com/https://www.justice.gov/api/v1/press_releases
+`)
+            .then(response=> response.text())
+            .then(text =>{
+                let parser = new DOMParser(),
+                xmlDoc = parser.parseFromString(text, 'text/xml');
+                // console.log(xmlDoc.getElementsByTagName('item')getElementsByTagName('item')[0,'title']);
+                const loop = xmlDoc.getElementsByTagName('item')[2].firstChild.nextSibling.firstChild;
+                console.log(loop);
+                output.appendChild(loop);
+
+                // for (let i = 0; i < loop.length; i++){
+                //     console.log(loop[0]);
+                // }
+            }
+
+            )
+        };
+       
+    </script>
+
+</body>
+
+</html>
+
